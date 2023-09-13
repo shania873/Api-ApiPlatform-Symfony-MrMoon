@@ -1,8 +1,3 @@
 # api/config/api_platform/resources.yaml
 resources:
-  App\Entity\Product: ~
-  App\Entity\Offer:
-    shortName: "Offer" # optional
-    description: "An offer from my shop" # optional
-    types: ["https://schema.org/Offer"] # optional
-    paginationItemsPerPage: 25 # optional
+  App\Entity\Works: ~
