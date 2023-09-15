@@ -4,7 +4,7 @@ resources:
   App\Entity\Medias: ~
   App\Entity\Movies: ~
   App\Entity\Diseases: ~
-  # App\Controller\WorksController:
+  App\Controller\WorksController:
     attributes:
       normalization_context:
         groups: ["work:read"]

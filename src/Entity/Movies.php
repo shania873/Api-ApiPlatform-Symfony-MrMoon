@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\MoviesRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Faker\Provider\ar_JO\Text;
 
 #[ORM\Entity(repositoryClass: MoviesRepository::class)]
 class Movies
@@ -22,7 +21,7 @@ class Movies
     private ?string $Title = null;
 
     #[ORM\Column]
-    private ?text $Overview = null;
+    private ?string $Overview = null;
 
     #[ORM\Column]
     private ?int $Popularity = null;
