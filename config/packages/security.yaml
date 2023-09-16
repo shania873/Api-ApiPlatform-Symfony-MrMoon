@@ -11,22 +11,24 @@ security:
         class: App\Entity\User
         property: email
   firewalls:
-    # disables authentication for assets and the profiler, adapt it according to your needs
     api:
       pattern: ^/api
       stateless: true
+      entry_point: jwt
+      json_login:
+        check_path: /api/login
+        success_handler: lexik_jwt_authentication.handler.authentication_success
+        failure_handler: lexik_jwt_authentication.handler.authentication_failure
       provider: app_user_provider
       jwt: ~
+      refresh_jwt:
+        check_path: /api/token/refresh
+        success_handler: lexik_jwt_authentication.handler.authentication_success
+        failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
-    main:
-      json_login:
-        check_path: /login
-        username_path: email
-        password_path: password
-        success_handler: lexik_jwt_authentication.handler.authentication_success
-        failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#the-firewall
@@ -37,11 +39,12 @@ security:
   # Easy way to control access for large sections of your site
   # Note: Only the *first* access control that matches will be used
   access_control:
-    - { path: ^/login, roles: PUBLIC_ACCESS }
+    - { path: ^/api/login, roles: PUBLIC_ACCESS }
     - { path: ^/api/diseases, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/api/medias, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/api/movies, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/api/works, roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
 when@test:
   security:

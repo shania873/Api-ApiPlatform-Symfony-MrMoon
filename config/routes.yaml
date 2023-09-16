@@ -7,5 +7,9 @@ kernel:
   type: annotation
 
 login:
-  path: /login
+  path: /api/login
   methods: ["POST"]
+
+api_refresh_token:
+  path: /api/token/refresh
+  controller: gesdinet.jwtrefreshtoken::refresh

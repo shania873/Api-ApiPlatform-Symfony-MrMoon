@@ -20,8 +20,7 @@ class Movies
     #[ORM\Column(length: 255)]
     private ?string $Title = null;
 
-    #[ORM\Column]
-    private ?string $Overview = null;
+ 
 
     #[ORM\Column]
     private ?int $Popularity = null;
@@ -40,6 +39,9 @@ class Movies
 
     #[ORM\Column(length: 255)]
     private ?string $Poster_Url = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $overview = null;
 
     public function getId(): ?int
     {
@@ -70,17 +72,7 @@ class Movies
         return $this;
     }
 
-    public function getOverview(): ?string
-    {
-        return $this->Overview;
-    }
 
-    public function setOverview(string $Overview): static
-    {
-        $this->Overview = $Overview;
-
-        return $this;
-    }
 
     public function getPopularity(): ?string
     {
@@ -150,6 +142,18 @@ class Movies
     public function setPosterUrl(string $Poster_Url): static
     {
         $this->Poster_Url = $Poster_Url;
+
+        return $this;
+    }
+
+    public function getOverview(): ?string
+    {
+        return $this->overview;
+    }
+
+    public function setOverview(?string $overview): static
+    {
+        $this->overview = $overview;
 
         return $this;
     }
