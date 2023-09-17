@@ -4,3 +4,9 @@ resources:
   App\Entity\Medias: ~
   App\Entity\Movies: ~
   App\Entity\Diseases: ~
+  App\Controller\MailController:
+    collectionOperations:
+      post:
+        method: "POST"
+        path: "/mail"
+        controller: 'App\Controller\MailController::index'
