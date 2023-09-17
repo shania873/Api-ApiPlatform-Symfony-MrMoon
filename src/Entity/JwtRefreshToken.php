@@ -10,6 +10,7 @@ use Gesdinet\JWTRefreshTokenBundle\Entity\RefreshToken;
  *
  * @ORM\Table("jwt_refresh_token")
  */
+
 class JwtRefreshToken extends RefreshToken
 {
 }

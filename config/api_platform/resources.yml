@@ -4,9 +4,33 @@ resources:
   App\Entity\Medias: ~
   App\Entity\Movies: ~
   App\Entity\Diseases: ~
-  App\Controller\MailController:
+  App\Entity\Register:
     collectionOperations:
-      post:
+      register:
         method: "POST"
-        path: "/mail"
-        controller: 'App\Controller\MailController::index'
+        path: "/register"
+        controller: 'App\Controller\RegisterController::register'
+        openapi_context:
+          summary: "Register a new user"
+          description: "Register a new user and send an activation email."
+
+        example: |
+          {
+              "email": "example@example.com",
+              "password": "password123"
+          }
+App\Entity\Users:
+  collectionOperations:
+    login:
+      method: "POST"
+      path: "/login"
+      controller: 'App\Controller\UsersController::login'
+      openapi_context:
+        summary: "Login"
+        description: "Login and get a JWT token."
+
+      example: |
+        {
+            "email": "example@example.com",
+            "password": "password123"
+        }
