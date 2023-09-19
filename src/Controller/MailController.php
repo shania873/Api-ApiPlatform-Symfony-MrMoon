@@ -18,7 +18,7 @@ class MailController extends AbstractController
     public function index()
     {
 
-        $sendgrid = new SendGrid('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');
+        $sendgrid = new SendGrid('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');
 
      
         $email = new Mail();

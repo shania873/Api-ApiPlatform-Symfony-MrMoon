@@ -1,11 +1,25 @@
-# api/config/packages/api_platform.yaml
 api_platform:
+  title: "Api Mrs Moon"
+  version: "0.0.1"
+  show_webby: false
   mapping:
     paths:
-      - "%kernel.project_dir%/src/Entity" # default configuration for annotations
-      - "%kernel.project_dir%/config/api_platform" # yaml or xml directory configuration
+      - "%kernel.project_dir%/src/Entity"
+      - "%kernel.project_dir%/config/api_platform"
+  patch_formats:
+    json: ["application/merge-patch+json"]
   swagger:
+    versions: [3]
     api_keys:
-      JWT:
+      apiKey:
         name: Authorization
         type: header
+  formats:
+    jsonld:
+      mime_types: ["application/ld+json"]
+    json:
+      mime_types: ["application/json"]
+    html:
+      mime_types: ["text/html"]
+  defaults:
+    pagination_items_per_page: 30

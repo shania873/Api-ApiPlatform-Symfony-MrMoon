@@ -13,24 +13,24 @@ resources:
         openapi_context:
           summary: "Register a new user"
           description: "Register a new user and send an activation email."
-
-        example: |
-          {
-              "email": "example@example.com",
-              "password": "password123"
-          }
-App\Entity\Users:
-  collectionOperations:
-    login:
-      method: "POST"
-      path: "/login"
-      controller: 'App\Controller\UsersController::login'
-      openapi_context:
-        summary: "Login"
-        description: "Login and get a JWT token."
-
-      example: |
-        {
-            "email": "example@example.com",
-            "password": "password123"
-        }
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      example: "vanaeca@hotmail.com"
+                    password:
+                      type: string
+                      example: "123456"
+                    firstname:
+                      type: string
+                      example: "Vanessa"
+                    lastname:
+                      type: string
+                      example: "Carrillo"
+                    birthday:
+                      type: string
+                      example: "12/12/1991"

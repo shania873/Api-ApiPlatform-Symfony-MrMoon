@@ -2,9 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\RegisterRepository;
+
+
 use Doctrine\DBAL\Types\Types;
+
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use App\Controller\RegisterController;
+use App\Repository\RegisterRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: RegisterRepository::class)]
 class Register
@@ -14,21 +21,41 @@ class Register
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * @Assert\NotBlank
+     * @Assert\Length(max=255)
+    */
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $activation = null;
 
+     /**
+     * @Assert\NotBlank
+     * @Assert\Length(max=255)
+    */
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $firstname = null;
 
+     /**
+     * @Assert\NotBlank
+     * @Assert\Length(max=255)
+    */
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $lastname = null;
 
+     /**
+     * @Assert\NotBlank
+     * @Assert\Length(max=255)
+    */
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $birthday = null;
 
+     /**
+     * @Assert\NotBlank
+     * @Assert\Length(max=255)
+    */
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
