@@ -7,11 +7,19 @@ use App\Entity\Register;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class RegisterController extends AbstractController
 {
+    private $params;
+
+    public function __construct(ParameterBagInterface $params)
+    {
+        $this->params = $params;
+    }
+
     #[Route('/registers', name: 'app_register')]
     public function register(ManagerRegistry $doctrine,Request $request): Response
     {
@@ -38,9 +46,10 @@ class RegisterController extends AbstractController
         
         // $activationLink = $this->generateUrl('activate_account', ['token' => $activationToken], \Symfony\Component\Routing\Generator\UrlGeneratorInterface::ABSOLUTE_URL);
         $registrationInfo->setActivationToken($activationToken);
+        
+        $apiKey = ($this->getParameter('app.sendgridapikey')) ?$this->getParameter('app.sendgridapikey'): getenv('SENDGRID_API_KEY');
 
-
-        $sendgrid = new SendGrid('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');
+        $sendgrid = new SendGrid($apiKey);
 
   
         $email = new Mail();
