@@ -55,33 +55,29 @@ class RegisterController extends AbstractController
         $email = new Mail();
         $email->setFrom('vanaeca@hotmail.com', 'Administrateur');
         $email->setSubject('Confirmez votre compte');
-        $email->addTo($userEmail, 'Nom du destinataire');
-        $email->addTo('vanaeca@hotmail.com', 'Administrateur');
+        $email->addTo('joc4911@gmail.com', 'Nom du destinataire');
         $email->addContent(
             "text/html",
-            'Bonjour ' . $firstname . ' ' . $lastname . ",<br><br>
-            Merci de vous être inscrit depuis mon application.<br><br>
-            Si vous êtes une personne à laquelle j'ai postulé, je vais activer votre compte dès que possible. Si vous êtes un spammeur, votre compte sera supprimé dans les 30 jours.<br><br>
-            Cordialement, Caroline<br><br>"
+            'Une personne à voulu s\'inscire ! ' . $firstname . ' ' . $lastname . ' ' . $userEmail . ",<br><br>"
         );
 
   
         try {
             $response = $sendgrid->send($email);
             $statusCode = $response->statusCode();
-    
-            if ($statusCode === 202) {
-                $entityManager->persist($registrationInfo);
-                $entityManager->flush();
-        
-                return new Response('Email envoyé avec succès.');
-            } else {
+            $entityManager->persist($registrationInfo);
+            $entityManager->flush();
+
+            return new Response("Merci de vous être inscrit depuis mon application.<br><br> Si vous êtes une personne à laquelle j'ai postulé, je vais activer votre compte dès que possible. Si vous êtes un spammeur, votre compte sera supprimé dans les 30 jours.<br><br> Cordialement, Caroline<br><br>");
+            // if ($statusCode === 202) {
+            //     return new Response('Email envoyé avec succès.');
+            // } else {
        
-                return new Response('Erreur lors de l\'envoi de l\'email de confirmation.', $statusCode);
-            }
+            //     return new Response('Erreur lors de l\'envoi de l\'email de confirmation.', $statusCode);
+            // }
         } catch (\Exception $e) {
         
-            return new Response('Erreur lors de l\'envoi de l\'email de confirmation : ' . $e->getMessage(), 500);
+            return new Response('Nous avons rencontré une erreur lors de l\'inscription, veuillez re-essayer plus tard' . $e->getMessage(), 500);
         }
     }
 }
