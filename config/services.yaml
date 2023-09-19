@@ -6,6 +6,7 @@
 parameters:
   app.sendgridapikey: "%env(API_KEY_SENDGRID)%"
   app.emailadmin: "%env(EMAIL_ADMIN)%"
+  app.emailadminsendgrid: "%env(EMAIL_SENDGRID)%"
 services:
   # default configuration for services in *this* file
   _defaults:

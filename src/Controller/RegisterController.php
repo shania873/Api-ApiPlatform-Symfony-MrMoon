@@ -13,13 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class RegisterController extends AbstractController
 {
-    private $params;
-
-    public function __construct(ParameterBagInterface $params)
-    {
-        $this->params = $params;
-    }
-
     #[Route('/registers', name: 'app_register')]
     public function register(ManagerRegistry $doctrine,Request $request): Response
     {
@@ -44,18 +37,19 @@ class RegisterController extends AbstractController
         $activationToken = bin2hex(random_bytes(32));
 
         
-        // $activationLink = $this->generateUrl('activate_account', ['token' => $activationToken], \Symfony\Component\Routing\Generator\UrlGeneratorInterface::ABSOLUTE_URL);
         $registrationInfo->setActivationToken($activationToken);
         
         $apiKey = ($this->getParameter('app.sendgridapikey')) ?$this->getParameter('app.sendgridapikey'): getenv('SENDGRID_API_KEY');
+        $adminEmail = ($this->getParameter('app.emailadmin')) ?$this->getParameter('app.emailadmin'): getenv('ADMIN_EMAIL');
+        $adminSendGridEmail = ($this->getParameter('app.emailadminsendgrid')) ?$this->getParameter('app.emailadminsendgrid'): getenv('EMAIL_SENDGRID');
 
         $sendgrid = new SendGrid($apiKey);
 
   
         $email = new Mail();
-        $email->setFrom('vanaeca@hotmail.com', 'Administrateur');
+        $email->setFrom($adminSendGridEmail, 'Administrateur');
         $email->setSubject('Confirmez votre compte');
-        $email->addTo('joc4911@gmail.com', 'Nom du destinataire');
+        $email->addTo($adminEmail, 'Nom du destinataire');
         $email->addContent(
             "text/html",
             'Une personne à voulu s\'inscire ! ' . $firstname . ' ' . $lastname . ' ' . $userEmail . ",<br><br>"
@@ -64,19 +58,13 @@ class RegisterController extends AbstractController
   
         try {
             $response = $sendgrid->send($email);
-            $statusCode = $response->statusCode();
+            
             $entityManager->persist($registrationInfo);
             $entityManager->flush();
 
             return new Response("Merci de vous être inscrit depuis mon application.<br><br> Si vous êtes une personne à laquelle j'ai postulé, je vais activer votre compte dès que possible. Si vous êtes un spammeur, votre compte sera supprimé dans les 30 jours.<br><br> Cordialement, Caroline<br><br>");
-            // if ($statusCode === 202) {
-            //     return new Response('Email envoyé avec succès.');
-            // } else {
-       
-            //     return new Response('Erreur lors de l\'envoi de l\'email de confirmation.', $statusCode);
-            // }
+  
         } catch (\Exception $e) {
-        
             return new Response('Nous avons rencontré une erreur lors de l\'inscription, veuillez re-essayer plus tard' . $e->getMessage(), 500);
         }
     }
