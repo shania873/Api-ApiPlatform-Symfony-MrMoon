@@ -1,6 +1,6 @@
 # Api Mrs Moon
 
-Pour les différents projets que je souhaiterais montrer sur mon github, je me suis permise de faire cette api pour pouvoir construire mes applications en React et Angular, en montrant en même temps mes compétences en symfony 6 et PHP 8.
+Pour présenter les différents projets que je souhaite afficher sur mon GitHub, j'ai créé cette API afin de pouvoir développer mes applications en React et Angular, tout en mettant en avant mes compétences en Symfony 6 et PHP 8.
 
 ## Lien vers l'api
 
@@ -37,10 +37,6 @@ Après avoir récupéré le projet
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `id`      | `string` | **Required**. Id of item to fetch |
-
-#### add(num1, num2)
-
-Takes two numbers and returns the sum.
 
 ## Tech Stack
 
