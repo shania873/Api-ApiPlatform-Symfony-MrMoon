@@ -15,33 +15,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ApiResource]
-#[Post(
-    name: 'create_rabbit', 
-    uriTemplate: '/rabbit/create', 
-    controller: RandomRabbit::class, 
-    openapi: new Model\Operation(
-        summary: 'Create a rabbit picture', 
-        description: '# Pop a great rabbit picture by color!\n\n![A great rabbit](https://rabbit.org/graphics/fun/netbunnies/jellybean1-brennan1.jpg)', 
-        requestBody: new Model\RequestBody(
-            content: new \ArrayObject([
-                'application/json' => [
-                    'schema' => [
-                        'type' => 'object', 
-                        'properties' => [
-                            'name' => ['type' => 'string'], 
-                            'description' => ['type' => 'string']
-                        ]
-                    ], 
-                    'example' => [
-                        'name' => 'Mr. Rabbit', 
-                        'description' => 'Pink Rabbit'
-                    ]
-                ]
-            ])
-        )
-    )
-)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]

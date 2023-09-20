@@ -3,7 +3,21 @@ resources:
   App\Entity\Works: ~
   App\Entity\Medias: ~
   App\Entity\Movies: ~
-  App\Entity\Diseases: ~
+  App\Entity\Diseases: 
+    operations:
+      get_diseases:
+        class: ApiPlatform\Metadata\Get
+        uriTemplate: "/getDiseases"
+        openapi:
+          tags: ["Diseases"]
+          responses: { 
+            201: { description: "Get Diseases" } 
+            400: { description: "Invalid Input" } 
+            422: { description: "Unprocessable entity" } 
+          }
+          summary: Get All Diseases
+          description: >
+            # Get All Diseases 
   App\Entity\User:
     operations:
       create_user:
