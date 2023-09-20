@@ -21,8 +21,8 @@ services:
       - "../src/DependencyInjection/"
       - "../src/Entity/"
       - "../src/Kernel.php"
-  App\OpenApi\JwtDecorator:
-    decorates: "api_platform.openapi.factory"
-    arguments: ["@.inner"]
+  # App\OpenApi\JwtDecorator:
+  #   decorates: "api_platform.openapi.factory"
+  #   arguments: ["@.inner"]
 
   Symfony\Component\Dotenv\Command\DotenvDumpCommand: ~

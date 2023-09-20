@@ -5,9 +5,8 @@ resources:
   App\Entity\Movies: ~
   App\Entity\Diseases: 
     operations:
-      get_diseases:
-        class: ApiPlatform\Metadata\Get
-        uriTemplate: "/getDiseases"
+      getAllDiseases:
+        class: ApiPlatform\Metadata\GetCollection
         openapi:
           tags: ["Diseases"]
           responses: { 
