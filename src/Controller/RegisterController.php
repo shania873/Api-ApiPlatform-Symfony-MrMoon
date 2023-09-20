@@ -4,17 +4,19 @@ namespace App\Controller;
 use SendGrid;
 use SendGrid\Mail\Mail;
 use App\Entity\Register;
+use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegisterController extends AbstractController
 {
     #[Route('/registers', name: 'app_register')]
-    public function register(ManagerRegistry $doctrine,Request $request): Response
+    public function register(ManagerRegistry $doctrine,Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $entityManager = $doctrine->getManager();
         $firstname = $request->attributes->get('data')->getFirstName();
@@ -25,13 +27,20 @@ class RegisterController extends AbstractController
         $password = $request->attributes->get('data')->getPassword();
         $activationToken = $request->attributes->get('data')->getActivationToken();
 
-        $registrationInfo = new Register();
+        $registrationInfo = new User();
      
         $registrationInfo->setEmail($userEmail);
         $registrationInfo->setFirstname($firstname);
         $registrationInfo->setLastname($lastname);
-        $registrationInfo->setPassword($password);
-        $registrationInfo->setActivation(false);
+        $registrationInfo->setActivationToken(false);
+        $registrationInfo->setIsActivate(false);
+        
+
+        $hashedPassword = $passwordHasher->hashPassword(
+            $registrationInfo,
+            $password
+        );
+        $registrationInfo->setPassword($hashedPassword);
         
 
         $activationToken = bin2hex(random_bytes(32));
@@ -57,7 +66,7 @@ class RegisterController extends AbstractController
 
   
         try {
-            $response = $sendgrid->send($email);
+            //$response = $sendgrid->send($email);
             
             $entityManager->persist($registrationInfo);
             $entityManager->flush();

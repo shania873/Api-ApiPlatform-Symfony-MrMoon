@@ -7,7 +7,7 @@ kernel:
   type: annotation
 
 login:
-  path: /api/login
+  path: /login
   methods: ["POST"]
 
 api_refresh_token:

@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -13,6 +15,33 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource]
+#[Post(
+    name: 'create_rabbit', 
+    uriTemplate: '/rabbit/create', 
+    controller: RandomRabbit::class, 
+    openapi: new Model\Operation(
+        summary: 'Create a rabbit picture', 
+        description: '# Pop a great rabbit picture by color!\n\n![A great rabbit](https://rabbit.org/graphics/fun/netbunnies/jellybean1-brennan1.jpg)', 
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/json' => [
+                    'schema' => [
+                        'type' => 'object', 
+                        'properties' => [
+                            'name' => ['type' => 'string'], 
+                            'description' => ['type' => 'string']
+                        ]
+                    ], 
+                    'example' => [
+                        'name' => 'Mr. Rabbit', 
+                        'description' => 'Pink Rabbit'
+                    ]
+                ]
+            ])
+        )
+    )
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -43,6 +72,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $activation_token = null;
+
+    #[ORM\Column( nullable: true)]
+    private ?bool $isActivate = null;
 
    
 
@@ -160,6 +192,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActivationToken(string $activation_token): static
     {
         $this->activation_token = $activation_token;
+
+        return $this;
+    }
+
+    public function isIsActivate(): ?bool
+    {
+        return $this->isActivate;
+    }
+
+    public function setIsActivate(bool $isActivate): static
+    {
+        $this->isActivate = $isActivate;
 
         return $this;
     }

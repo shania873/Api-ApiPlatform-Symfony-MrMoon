@@ -4,33 +4,36 @@ resources:
   App\Entity\Medias: ~
   App\Entity\Movies: ~
   App\Entity\Diseases: ~
-  App\Entity\Register:
-    collectionOperations:
-      register:
-        method: "POST"
-        path: "/register"
-        controller: 'App\Controller\RegisterController::register'
-        openapi_context:
-          summary: "Register a new user"
-          description: "Register a new user and send an activation email."
+  App\Entity\User:
+    operations:
+      create_user:
+        class: ApiPlatform\Metadata\Post
+        uriTemplate: "/createUser"
+        controller: App\Controller\RegisterController::register
+        openapi:
+          tags: ["Register"]
+          responses: { 
+            201: { description: "User create" } 
+            400: { description: "Invalid Input" } 
+            422: { description: "Unprocessable entity" } 
+          }
+          summary: Register to the application
+          description: >
+            # Register to the application
           requestBody:
             content:
               application/json:
                 schema:
                   type: object
                   properties:
-                    email:
-                      type: string
-                      example: "vanaeca@hotmail.com"
-                    password:
-                      type: string
-                      example: "123456"
-                    firstname:
-                      type: string
-                      example: "Vanessa"
-                    lastname:
-                      type: string
-                      example: "Carrillo"
-                    birthday:
-                      type: string
-                      example: "12/12/1991"
+                    email: { type: string }
+                    password: { type: string }
+                    firstname: { type: string }
+                    lastname: { type: string }
+                    birthday: { type: string }
+                example:
+                  email: joc4911@gmail.com
+                  password: "123456"
+                  firstname: Carlos
+                  lastname: Carrillo
+                  birthday: 12/12/1991
