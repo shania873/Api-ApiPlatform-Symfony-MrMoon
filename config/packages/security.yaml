@@ -43,7 +43,7 @@ security:
     - { path: ^/login, roles: PUBLIC_ACCESS }
     - { path: ^/api/diseases, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/api/medias, roles: IS_AUTHENTICATED_FULLY }
-    - { path: ^/api/movies, roles: IS_AUTHENTICATED_FULLY }
+    # - { path: ^/api/movies, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/api/works, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
