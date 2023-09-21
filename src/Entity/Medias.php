@@ -19,8 +19,11 @@ class Medias
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $link = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
+
+    #[ORM\ManyToOne(inversedBy: 'medias')]
+    private ?Works $works = null;
 
     public function getId(): ?int
     {
@@ -59,6 +62,18 @@ class Medias
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getWorks(): ?Works
+    {
+        return $this->works;
+    }
+
+    public function setWorks(?Works $works): static
+    {
+        $this->works = $works;
 
         return $this;
     }
