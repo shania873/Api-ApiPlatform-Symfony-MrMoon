@@ -14,8 +14,8 @@ use SendGrid\Mail\Mail;
 
 class MailController extends AbstractController
 {
-    #[Route('/api/mail', name: 'app_mail')]
-    public function index()
+    #[Route('/api/setMail', name: 'app_mail')]
+    public function createMail()
     {
 
         $sendgrid = new SendGrid('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');
