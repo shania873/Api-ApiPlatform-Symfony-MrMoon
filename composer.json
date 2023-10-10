@@ -1,4 +1,6 @@
 {
+  "name": "api-mrsmoon",
+  "description": "API for Mrsmoon",
   "type": "project",
   "license": "proprietary",
   "minimum-stability": "stable",
