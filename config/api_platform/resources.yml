@@ -22,7 +22,7 @@ resources:
       create_user:
         class: ApiPlatform\Metadata\Post
         uriTemplate: "/createUser"
-        controller: App\Controller\RegisterController::register
+        controller: App\Controller\RegisterController::createRegister
         openapi:
           tags: ["Register"]
           responses: { 

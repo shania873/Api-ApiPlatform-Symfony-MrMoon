@@ -15,17 +15,17 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegisterController extends AbstractController
 {
-    #[Route('/registers', name: 'app_register')]
-    public function register(ManagerRegistry $doctrine,Request $request, UserPasswordHasherInterface $passwordHasher): Response
+    #[Route('/setRegister', name: 'app_register')]
+    public function createRegister(ManagerRegistry $doctrine,User $data, UserPasswordHasherInterface $passwordHasher): Response
     {
-        $entityManager = $doctrine->getManager();
-        $firstname = $request->attributes->get('data')->getFirstName();
-        $lastname = $request->attributes->get('data')->getLastName();
- 
-        $userEmail = $request->attributes->get('data')->getEmail();
 
-        $password = $request->attributes->get('data')->getPassword();
-        $activationToken = $request->attributes->get('data')->getActivationToken();
+        $entityManager = $doctrine->getManager();
+        
+        $firstname = $data->getFirstName();
+        $lastname = $data->getLastName();
+        $userEmail = $data->getEmail();
+        $password = $data->getPassword();
+        $activationToken = $data->getActivationToken();
 
         $registrationInfo = new User();
      
@@ -66,7 +66,6 @@ class RegisterController extends AbstractController
 
   
         try {
-            //$response = $sendgrid->send($email);
             
             $entityManager->persist($registrationInfo);
             $entityManager->flush();
