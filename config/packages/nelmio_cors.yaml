@@ -1,14 +1,13 @@
 nelmio_cors:
   defaults:
-    origin_regex: true
-    allow_origin: ["%env(CORS_ALLOW_ORIGIN)%"]
-    allow_methods: ["GET"]
+    allow_credentials: true
+    allow_origin: ["http://localhost:3000"] # Remplacez par le domaine de votre application React
     allow_headers: ["Content-Type", "Authorization"]
-    expose_headers: ["Link"]
+    allow_methods: ["POST", "GET", "OPTIONS", "DELETE", "PUT"]
     max_age: 3600
   paths:
-    "^/api/movies":
-      allow_origin: ["*"]
-      allow_headers: ["*"]
-      allow_methods: ["GET"]
+    "^/": # Spécifiez ici les chemins que vous souhaitez appliquer la configuration CORS
+      allow_origin: ["http://localhost:3000"] # Remplacez par le domaine de votre application React
+      allow_headers: ["Content-Type", "Authorization"]
+      allow_methods: ["POST", "GET", "OPTIONS", "DELETE", "PUT"]
       max_age: 3600

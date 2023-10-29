@@ -9,9 +9,9 @@ gesdinet_jwt_refresh_token:
   user_identity_field: email
   cookie:
     enabled: true
-    same_site: lax
-    path: /
-    domain: null
-    http_only: true
-    secure: true
-    remove_token_from_body: true
+    same_site: none # default value
+    path: / # default value
+    domain: null # default value
+    http_only: false # default value
+    secure: true # default value
+    remove_token_from_body: true # default value
