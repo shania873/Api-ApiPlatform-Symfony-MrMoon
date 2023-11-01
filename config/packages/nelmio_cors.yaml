@@ -6,7 +6,7 @@ nelmio_cors:
     allow_methods: ["POST", "GET", "OPTIONS", "DELETE", "PUT"]
     max_age: 3600
   paths:
-    "^/": # Spécifiez ici les chemins que vous souhaitez appliquer la configuration CORS
+    "^/api": # Spécifiez ici les chemins que vous souhaitez appliquer la configuration CORS
       allow_origin: ["http://localhost:3000"] # Remplacez par le domaine de votre application React
       allow_headers: ["Content-Type", "Authorization"]
       allow_methods: ["POST", "GET", "OPTIONS", "DELETE", "PUT"]

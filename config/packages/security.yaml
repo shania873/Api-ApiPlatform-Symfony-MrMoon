@@ -46,16 +46,7 @@ security:
     # - { path: ^/api/movies, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/api/works, roles: IS_AUTHENTICATED_FULLY }
     - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-gesdinet_jwt_refresh_token:
-  ttl: 6300
-  cookie:
-    enabled: true
-    same_site: none # default value
-    path: / # default value
-    domain: null # default value
-    http_only: false # default value
-    secure: true # default value
-    remove_token_from_body: true # default value
+
 when@test:
   security:
     password_hashers:
