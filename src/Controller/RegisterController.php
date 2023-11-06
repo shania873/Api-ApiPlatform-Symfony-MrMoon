@@ -3,12 +3,9 @@
 namespace App\Controller;
 use SendGrid;
 use SendGrid\Mail\Mail;
-use App\Entity\Register;
 use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

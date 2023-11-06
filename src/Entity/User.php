@@ -49,6 +49,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column( nullable: true)]
     private ?bool $isActivate = null;
 
+    // #[ORM\OneToMany(mappedBy: 'User', targetEntity: Contacts::class, cascade: ['persist'])]
+    // private Collection $contacts;
+
+    // public function __construct()
+    // {
+    //     $this->contacts = new ArrayCollection();
+    // }
+
    
 
     public function getId(): ?int
@@ -180,6 +188,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    // /**
+    //  * @return Collection<int, Contacts>
+    //  */
+    // public function getContacts(): Collection
+    // {
+    //     return $this->contacts;
+    // }
+
+    // public function addContact(Contacts $contact): static
+    // {
+    //     if (!$this->contacts->contains($contact)) {
+    //         $this->contacts->add($contact);
+    //         $contact->setUser($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeContact(Contacts $contact): static
+    // {
+    //     if ($this->contacts->removeElement($contact)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($contact->getUser() === $this) {
+    //             $contact->setUser(null);
+    //         }
+    //     }
+
+    //     return $this;
+    // }
 
     
 }

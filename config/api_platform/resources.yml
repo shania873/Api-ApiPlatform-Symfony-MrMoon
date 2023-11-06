@@ -3,6 +3,7 @@ resources:
   App\Entity\Works: ~
   App\Entity\Medias: ~
   App\Entity\Movies: ~
+  App\Entity\Contacts: ~                  
   App\Entity\Diseases: 
     operations:
       getAllDiseases:
@@ -50,3 +51,8 @@ resources:
                   firstname: Carlos
                   lastname: Carrillo
                   birthday: 12/12/1991
+      # get_user:
+      #   class: ApiPlatform\Metadata\Get
+      #   uriTemplate: "/getUser"
+      #   controller: App\Controller\UserController::getUser
+       
