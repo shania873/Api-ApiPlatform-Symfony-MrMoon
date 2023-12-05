@@ -25,8 +25,8 @@ class Contacts
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $phone = null;
 
-    #[ORM\ManyToOne(inversedBy: 'contacts')]
-    private ?User $user = null;
+    // #[ORM\ManyToOne(inversedBy: 'contacts')]
+    // private ?User $user = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -80,17 +80,17 @@ class Contacts
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
+    // public function getUser(): ?User
+    // {
+    //     return $this->user;
+    // }
 
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
+    // public function setUser(?User $user): static
+    // {
+    //     $this->user = $user;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getDescription(): ?string
     {
